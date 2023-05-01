@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title%></title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/Images/puppy_circle_head.ico"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/recipe.js"></script>
+    <script>
+      function pageLoad() {
+        getNextId();
+        document.getElementById("recipeId").value = nextId;
+      }
+    </script>
+  </head>
+  <body onload="pageLoad()" class="p-2 m-0 border-0">
+    <% include template/header.ejs%>
+    <main class="flex-container">
+      <div id="recipeForm" class="border border-0">
+        <h2>New Recipe</h2>
+        <form action="/dashboard" id="addRecipe" class="row g-3">
+          <div class="col-md-1">
+            <label for="recipeId" class="form-label">ID: </label>
+            <input
+              type="number"
+              id="recipeId"
+              name="recipeId"
+              class="form-control"
+              readonly="readonly"
+            />
+          </div>
+          <div class="col-md-7">
+            <label for="recipeTitle" class="form-label col-md-6">Title: </label>
+            <input
+              type="text"
+              id="recipeTitle"
+              name="recipeTitle"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="recipeNumServing" class="form-label">Servings: </label>
+            <input
+              type="number"
+              id="recipeNumServing"
+              name="recipeNumServing"
+              min="1"
+              value="1"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="recipeNumPeople" class="form-label">Feeds: </label>
+            <input
+              type="number"
+              id="recipeNumPeople"
+              name="recipeNumPeople"
+              min="1"
+              value="1"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="recipeDescription" class="form-label"
+              >Description:
+            </label>
+            <textarea
+              id="recipeDescription"
+              name="recipeDescription"
+              rows="4"
+              cols="30"
+              class="form-control"
+            ></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="recipeImage" class="form-label">Add a picture</label>
+            <input class="form-control" type="file" id="recipeImage" />
+          </div>
+          <div class="col-md-6">
+            <label for="recipeSteps" class="form-label">Steps:</label>
+            <textarea
+              id="recipeSteps"
+              name="recipeSteps"
+              rows="4"
+              cols="1"
+              class="form-control"
+            >
+            </textarea>
+          </div>
+          <div class="ingredients">
+            <div class="col-md-3">
+              <label for="recipeIngredient" class="form-label"
+                >Ingredient:</label
+              >
+              <input
+                type="text"
+                id="recipeIngredient"
+                name="recipeIngredient"
+                class="form-control"
+              />
+            </div>
+            <div class="col-md-2">
+              <label for="recipeIngredientSize" class="form-label"
+                >Amount:</label
+              >
+              <input
+                type="text"
+                id="recipeIngredientSize"
+                name="recipeIngredientSize"
+                class="form-control"
+              />
+            </div>
+            <div class="col-md-1">
+              <label for="recipeIngredientUnit" class="form-label">Unit:</label>
+              <input
+                type="text"
+                id="recipeIngredientUnit"
+                name="recipeIngredientUnit"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="d-grid gap-2 d-md-block">
+            <button
+              class="btn btn-outline-primary"
+              onclick="saveRecipe(addRecipe)"
+              type="submit"
+            >
+              Save
+            </button>
+            <button class="btn btn-outline-primary" type="submit">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <% include template/footer.ejs%>
+  </body>
+</html>
