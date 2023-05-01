@@ -11,7 +11,7 @@ var dashboardRouter = require("./routes/dashboard");
 var newRecipeRouter = require("./routes/new_recipe");
 var viewRouter = require("./routes/new_recipe");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
