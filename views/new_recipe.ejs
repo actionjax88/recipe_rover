@@ -87,10 +87,7 @@
               class="form-control"
             ></textarea>
           </div>
-          <div class="col-md-6">
-            <label for="recipeImage" class="form-label">Add a picture</label>
-            <input class="form-control" type="file" id="recipeImage" />
-          </div>
+
           <div class="col-md-6">
             <label for="recipeSteps" class="form-label">Steps:</label>
             <textarea
@@ -102,26 +99,29 @@
             >
             </textarea>
           </div>
-          <div class="ingredients">
+
+          <div class="col-md-12 row" id="recipeIngredientDiv1">
             <div class="col-md-3">
-              <label for="recipeIngredient" class="form-label"
+              <label for="recipeIngredient1" class="form-label"
                 >Ingredient:</label
               >
               <input
                 type="text"
-                id="recipeIngredient"
-                name="recipeIngredient"
+                id="recipeIngredient1"
+                name="recipeIngredient1"
                 class="form-control"
+                onchange="addIngredient()"
               />
             </div>
+
             <div class="col-md-2">
-              <label for="recipeIngredientSize" class="form-label"
+              <label for="recipeIngredientSize1" class="form-label"
                 >Amount:</label
               >
               <input
                 type="text"
-                id="recipeIngredientSize"
-                name="recipeIngredientSize"
+                id="recipeIngredientSize1"
+                name="recipeIngredientSize1"
                 class="form-control"
               />
             </div>
@@ -129,11 +129,15 @@
               <label for="recipeIngredientUnit" class="form-label">Unit:</label>
               <input
                 type="text"
-                id="recipeIngredientUnit"
-                name="recipeIngredientUnit"
+                id="recipeIngredientUnit1"
+                name="recipeIngredientUnit1"
                 class="form-control"
               />
             </div>
+          </div>
+          <div class="col-md-6">
+            <label for="recipeImage" class="form-label">Add a picture</label>
+            <input class="form-control" type="file" id="recipeImage" />
           </div>
           <div class="d-grid gap-2 d-md-block">
             <button

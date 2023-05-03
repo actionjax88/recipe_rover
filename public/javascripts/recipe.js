@@ -90,7 +90,7 @@ function loadRecipes() {
     card.classList = "card";
     card.style = "width: 18rem";
     const content = `
-    <div class="card" style="max-width: 18rem; min-width: 15rem">
+    <div class="card" style="max-width: 18rem; min-width: 15rem" id="recipeid${recipe.id}">
           <img
             src="/images/puppy_circle_head.ico"
             class="card-img-top"
@@ -101,45 +101,77 @@ function loadRecipes() {
             <p class="card-text">
             ${recipe.description}
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/view_recipe" class="btn btn-primary" id=recipeButton${recipe.id}>View Details</a>
           </div>
   `;
-
     container.innerHTML += content;
+  });
+  recipes.forEach((recipe) => {
+    let viewFunction = "viewRecipe(" + recipe.id + ")";
+    document
+      .getElementById("recipeButton" + recipe.id)
+      .setAttribute("onclick", viewFunction);
   });
 }
 
+let newRecipeIngredientsNum = 1;
 function addIngredient() {
+  let recipeIngredientId = "#recipeIngredientDiv" + newRecipeIngredientsNum;
+  let previousIngredient = document.querySelector(recipeIngredientId);
+  newRecipeIngredientsNum += 1;
+
+  let newIngredient = document.createElement("div");
+  newIngredient.classList.add("col-md-12");
+  newIngredient.classList.add("row");
+  newIngredient.setAttribute(
+    "id",
+    `recipeIngredientDiv${newRecipeIngredientsNum}`
+  );
+
+  previousIngredient.after(newIngredient);
+
   const content = `
-  <div class="col-md-3">
-              <label for="recipeIngredient" class="form-label"
-                >Ingredient:</label
-              >
-              <input
-                type="text"
-                id="recipeIngredient"
-                name="recipeIngredient"
-                class="form-control"
-              />
-            </div>
-            <div class="col-md-2">
-              <label for="recipeIngredientSize" class="form-label"
-                >Amount:</label
-              >
-              <input
-                type="text"
-                id="recipeIngredientSize"
-                name="recipeIngredientSize"
-                class="form-control"
-              />
-            </div>
-            <div class="col-md-1">
-              <label for="recipeIngredientUnit" class="form-label">Unit:</label>
-              <input
-                type="text"
-                id="recipeIngredientUnit"
-                name="recipeIngredientUnit"
-                class="form-control"
-              />
-            </div>`;
+    <div class="col-md-3">
+      <label for="recipeIngredient${newRecipeIngredientsNum}" class="form-label"
+        >Ingredient:</label
+      >
+      <input
+        type="text"
+        id="recipeIngredient${newRecipeIngredientsNum}"
+        name="recipeIngredient${newRecipeIngredientsNum}"
+        class="form-control"
+        onchange="addIngredient()"
+      />
+    </div>
+
+    <div class="col-md-2">
+      <label for="recipeIngredientSize${newRecipeIngredientsNum}" class="form-label"
+        >Amount:</label
+      >
+      <input
+        type="text"
+        id="recipeIngredientSize${newRecipeIngredientsNum}"
+        name="recipeIngredientSize${newRecipeIngredientsNum}"
+        class="form-control"
+      />
+    </div>
+    <div class="col-md-1">
+      <label for="recipeIngredientUnit${newRecipeIngredientsNum}" class="form-label"
+        >Unit:</label
+      >
+      <input
+        type="text"
+        id="recipeIngredientUnit${newRecipeIngredientsNum}"
+        name="recipeIngredientUnit${newRecipeIngredientsNum}"
+        class="form-control"
+      />
+    </div>`;
+
+  newIngredient.innerHTML = content;
+}
+
+function viewRecipe(recipeId) {
+  console.log(recipeId);
+  document.cookie =
+    "currentRecipe=" + JSON.stringify(recipes.indexOf(recipeId));
 }
